@@ -5,14 +5,14 @@ import java.io.FileReader;
 import java.io.IOException;
 
 /**
- * The Calculadora class provides a method to evaluate arithmetic expressions using a stack-based approach.
+ * The Calculadora class provides a method to evaluate arithmetic expressions
+ * using a stack-based approach.
  * Authors:
- *  Javier Alvarado 24546
- *  Juan Montenegro 24750
- *  Jonathan Tubac 24484
+ * Javier Alvarado 24546
+ * Juan Montenegro 24750
+ * Jonathan Tubac 24484
  */
-public class Calculadora implements IPostfixCalculator{
-
+public class Calculadora implements IPostfixCalculator {
 
     private String expresion;
     /**
@@ -21,7 +21,7 @@ public class Calculadora implements IPostfixCalculator{
      * @param expression the arithmetic expression to evaluate
      * @return the result of the evaluated expression
      * @throws IllegalArgumentException if the expression is invalid
-     * @throws ArithmeticException if there is an attempt to divide by zero
+     * @throws ArithmeticException      if there is an attempt to divide by zero
      */
 
     private StackVector<Integer> pila = new StackVector<Integer>();
@@ -38,7 +38,6 @@ public class Calculadora implements IPostfixCalculator{
             throw new IOException("Error leyendo el archivo: " + e.getMessage());
         }
     }
-
 
     @Override
     public int evaluateExpression() throws IllegalArgumentException {
@@ -86,7 +85,17 @@ public class Calculadora implements IPostfixCalculator{
     private boolean esOperador(String token) {
         return "+-*/%".contains(token);
     }
+
     private boolean esOperando(String token) {
         return token.matches("\\d+(\\.\\d+)?"); // Matches integers and decimals
     }
+
+    public void setExpresion(String expresion) {
+        this.expresion = expresion;
     }
+
+    public String getExpresion() {
+        return this.expresion;
+    }
+
+}
