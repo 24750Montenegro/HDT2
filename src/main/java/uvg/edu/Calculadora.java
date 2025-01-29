@@ -95,4 +95,13 @@ public class Calculadora implements IPostfixCalculator {
     private boolean esOperando(String token) {
         return token.matches("\\d+(\\.\\d+)?"); // Matches integers and decimals
     }
+
+    public void setExpresion(String expresion) {
+        this.expresion = expresion;
     }
+    
+    public String getExpresion() {
+        return this.expresion;
+    }
+}    
+    
