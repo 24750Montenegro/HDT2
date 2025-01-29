@@ -11,21 +11,17 @@ import java.io.IOException;
  *  Juan Montenegro 24750
  *  Jonathan Tubac 24484
  */
-public class Calculadora implements IPostfixCalculator{
-
+public class Calculadora implements IPostfixCalculator {
 
     private String expresion;
-    /**
-     * Evaluates an arithmetic expression in Reverse Polish Notation (RPN).
-     *
-     * @param expression the arithmetic expression to evaluate
-     * @return the result of the evaluated expression
-     * @throws IllegalArgumentException if the expression is invalid
-     * @throws ArithmeticException if there is an attempt to divide by zero
-     */
-
     private StackVector<Integer> pila = new StackVector<Integer>();
 
+    /**
+     * Reads an arithmetic expression from a file.
+     *
+     * @param path the path to the file containing the expression
+     * @throws IOException if an I/O error occurs
+     */
     @Override
     public void readFromFile(String path) throws IOException {
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
@@ -39,7 +35,14 @@ public class Calculadora implements IPostfixCalculator{
         }
     }
 
-
+    /**
+     * Evaluates an arithmetic expression in Reverse Polish Notation (RPN).
+     *
+     * @return the result of the evaluated expression
+     * @throws IllegalArgumentException if the expression is invalid
+     * @throws IllegalStateException if there is no expression to evaluate
+     * @throws ArithmeticException if there is an attempt to divide by zero
+     */
     @Override
     public int evaluateExpression() throws IllegalArgumentException {
         if (expresion == null || expresion.isEmpty()) {
@@ -83,10 +86,23 @@ public class Calculadora implements IPostfixCalculator{
         return pila.pop();
     }
 
+    /**
+     * Checks if a token is an operator.
+     *
+     * @param token the token to check
+     * @return true if the token is an operator, false otherwise
+     */
     private boolean esOperador(String token) {
         return "+-*/%".contains(token);
     }
+
+    /**
+     * Checks if a token is an operand.
+     *
+     * @param token the token to check
+     * @return true if the token is an operand, false otherwise
+     */
     private boolean esOperando(String token) {
         return token.matches("\\d+(\\.\\d+)?"); // Matches integers and decimals
     }
-    }
+}
