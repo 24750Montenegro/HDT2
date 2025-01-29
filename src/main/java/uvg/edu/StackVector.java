@@ -1,35 +1,67 @@
 package uvg.edu;
 import java.util.Vector;
 
-public class StackVector<T> implements Ipila<T>{
+/**
+ * The StackVector class implements a stack using a Vector.
+ * Authors:
+ *  Javier Alvarado 24546
+ *  Juan Montenegro 24750
+ *  Jonathan Tubac 24484
+ *
+ * @param <T> the type of elements in this stack
+ */
+public class StackVector<T> implements Ipila<T> {
     private Vector<T> vector;
 
-    public StackVector(){
+    /**
+     * Constructs an empty stack.
+     */
+    public StackVector() {
         vector = new Vector<>();
     }
 
+    /**
+     * Pushes an item onto the top of this stack.
+     *
+     * @param item the item to be pushed onto this stack
+     */
     @Override
-    public void push(T item){
+    public void push(T item) {
         vector.add(item);
     }
 
-
+    /**
+     * Returns true if this stack contains no elements.
+     *
+     * @return true if this stack contains no elements
+     */
     @Override
-    public boolean isEmpty(){
+    public boolean isEmpty() {
         return vector.isEmpty();
     }
 
+    /**
+     * Removes the object at the top of this stack and returns that object as the value of this function.
+     *
+     * @return the object at the top of this stack
+     * @throws IllegalArgumentException if this stack is empty
+     */
     @Override
-    public T pop(){
-        if (isEmpty()){
+    public T pop() {
+        if (isEmpty()) {
             throw new IllegalArgumentException("Pila vacía");
-        }else{
+        } else {
             return vector.remove(vector.size() - 1);
         }
     }
 
+    /**
+     * Returns the number of elements in this stack.
+     *
+     * @return the number of elements in this stack
+     */
     @Override
-    public int size(){
+    public int size() {
         return vector.size();
     }
 }
