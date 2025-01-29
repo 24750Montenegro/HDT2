@@ -24,25 +24,13 @@ public class Main {
         Calculadora calculator = new Calculadora();
         String archivo = "src/main/java/uvg/edu/datos.txt";
 
-        // Try-with-resources to ensure the BufferedReader is closed after use
-        try (BufferedReader reader = new BufferedReader(new FileReader(archivo))) {
-            String expression;
-            // Read each line (expression) from the file
-            while ((expression = reader.readLine()) != null) {
-                try {
-                    // Evaluate the expression and print the result
-                    int result = calculator.evaluar(expression);
-                    System.out.println("Expresión: " + expression );
-                    System.out.println("Resultado = " + result);
-                    System.out.println();
-                } catch (Exception e) {
-                    // Handle any exceptions that occur during evaluation
-                    System.out.println("Error evaluando '" + expression + "': " + e.getMessage());
-                }
-            }
+        try {
+            calculator.readFromFile(archivo);
+            System.out.println("Resultado: " + calculator.evaluateExpression());
         } catch (IOException e) {
-            // Handle any exceptions that occur during file reading
-            System.out.println("Error leyendo el archivo: " + e.getMessage());
+            System.err.println("Error leyendo el archivo: " + e.getMessage());
+        } catch (IllegalArgumentException e) {
+            System.err.println("Error evaluando la expresión: " + e.getMessage());
         }
     }
 }

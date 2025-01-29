@@ -9,7 +9,7 @@ package uvg.edu;
  *
  * @param <T> the type of elements in this stack
  */
-public interface Ipila<T> {
+public interface IStack<T> {
     /**
      * Pushes an item onto the top of this stack.
      *
@@ -24,6 +24,8 @@ public interface Ipila<T> {
      * @throws IllegalArgumentException if this stack is empty
      */
     public T pop();
+
+    public T peek();
 
     /**
      * Returns true if this stack contains no elements.

@@ -10,7 +10,7 @@ import java.util.Vector;
  *
  * @param <T> the type of elements in this stack
  */
-public class StackVector<T> implements Ipila<T> {
+public class StackVector<T> implements IStack<T> {
     private Vector<T> vector;
 
     /**
@@ -63,5 +63,14 @@ public class StackVector<T> implements Ipila<T> {
     @Override
     public int size() {
         return vector.size();
+    }
+
+    @Override
+    public T peek() {
+        if (isEmpty()) {
+            throw new IllegalArgumentException("Pila vacía");
+        } else {
+            return vector.get(vector.size() - 1);
+        }
     }
 }
