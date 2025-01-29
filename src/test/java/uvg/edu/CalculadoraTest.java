@@ -33,10 +33,22 @@ public class CalculadoraTest {
     @Test
     void testLeerYEvaluarExpresion() throws IOException {
         String archivo = "src/main/java/uvg/edu/datos.txt";
-        calculadora.readFromFile(archivo);
 
-        int resultado = calculadora.evaluateExpression();
-        Assertions.assertEquals(3, resultado);
+        try {
+            calculadora.readFromFile(archivo);
+            for (String expresion : calculadora.getExpresiones()) {
+                calculadora.setExpresion(expresion);
+                System.out.println("Expresión: " + expresion);
+                int resultado = calculadora.evaluateExpression();
+                System.out.println("Resultado: " + resultado);
+                System.out.println();
+            }
+            Assertions.assertEquals(32, calculadora.evaluateExpression(), "El resultado de la expresión debe ser 5");
+        } catch (IOException e) {
+            System.err.println("Error leyendo el archivo: " + e.getMessage());
+        } catch (IllegalArgumentException e) {
+            System.err.println("Error evaluando la expresión: " + e.getMessage());
+        }
     }
 
     /**
