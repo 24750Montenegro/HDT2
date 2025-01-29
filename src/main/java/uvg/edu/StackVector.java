@@ -65,6 +65,12 @@ public class StackVector<T> implements IStack<T> {
         return vector.size();
     }
 
+    /**
+     * Looks at the object at the top of this stack without removing it from the stack.
+     *
+     * @return the object at the top of this stack
+     * @throws IllegalArgumentException if this stack is empty
+     */
     @Override
     public T peek() {
         if (isEmpty()) {

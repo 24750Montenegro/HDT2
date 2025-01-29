@@ -21,7 +21,7 @@ public class Calculadora implements IPostfixCalculator {
      * @param expression the arithmetic expression to evaluate
      * @return the result of the evaluated expression
      * @throws IllegalArgumentException if the expression is invalid
-     * @throws ArithmeticException      if there is an attempt to divide by zero
+     * @throws ArithmeticException if there is an attempt to divide by zero
      */
 
     private StackVector<Integer> pila = new StackVector<Integer>();
@@ -38,6 +38,7 @@ public class Calculadora implements IPostfixCalculator {
             throw new IOException("Error leyendo el archivo: " + e.getMessage());
         }
     }
+
 
     @Override
     public int evaluateExpression() throws IllegalArgumentException {
@@ -82,20 +83,16 @@ public class Calculadora implements IPostfixCalculator {
         return pila.pop();
     }
 
+    /**
+     * Checks if a token is an operator.
+     *
+     * @param token the token to check
+     * @return true if the token is an operator, false otherwise
+     */
     private boolean esOperador(String token) {
         return "+-*/%".contains(token);
     }
-
     private boolean esOperando(String token) {
         return token.matches("\\d+(\\.\\d+)?"); // Matches integers and decimals
     }
-
-    public void setExpresion(String expresion) {
-        this.expresion = expresion;
     }
-
-    public String getExpresion() {
-        return this.expresion;
-    }
-
-}

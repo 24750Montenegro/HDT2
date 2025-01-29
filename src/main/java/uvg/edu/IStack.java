@@ -1,7 +1,7 @@
 package uvg.edu;
 
 /**
- * The Ipila interface defines the basic operations for a stack data structure.
+ * The IStack interface defines the basic operations for a stack data structure.
  * Authors:
  *  Javier Alvarado 24546
  *  Juan Montenegro 24750
@@ -25,6 +25,12 @@ public interface IStack<T> {
      */
     public T pop();
 
+    /**
+     * Looks at the object at the top of this stack without removing it from the stack.
+     *
+     * @return the object at the top of this stack
+     * @throws IllegalArgumentException if this stack is empty
+     */
     public T peek();
 
     /**
