@@ -3,6 +3,8 @@ package uvg.edu;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The Calculadora class provides a method to evaluate arithmetic expressions using a stack-based approach.
@@ -22,17 +24,26 @@ public class Calculadora implements IPostfixCalculator {
      * @param path the path to the file containing the expression
      * @throws IOException if an I/O error occurs
      */
+    private List<String> expresiones = new ArrayList<>();
+
     @Override
     public void readFromFile(String path) throws IOException {
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String linea;
-            if ((linea = br.readLine()) != null) {
-                this.expresion = linea;
-                System.out.println("Contenido leído: " + this.expresion);
+            while ((linea = br.readLine()) != null) {
+                expresiones.add(linea);
             }
         } catch (IOException e) {
             throw new IOException("Error leyendo el archivo: " + e.getMessage());
         }
+    }
+
+    public List<String> getExpresiones() {
+        return expresiones;
+    }
+
+    public void setExpresion(String expresion) {
+        this.expresion = expresion;
     }
 
     /**
@@ -53,7 +64,11 @@ public class Calculadora implements IPostfixCalculator {
         for (String token : tokens) {
             if (esOperando(token)) {
                 pila.push(Integer.parseInt(token));
+
             } else if (esOperador(token)) {
+                if(pila.size() < 2){
+                    throw new IllegalArgumentException("Faltan operandos");
+                }
                 int operandoB = pila.pop();
                 int operandoA = pila.pop();
 

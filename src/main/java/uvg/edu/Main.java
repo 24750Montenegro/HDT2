@@ -20,17 +20,24 @@ public class Main {
      *
      * @param args Command line arguments (not used).
      */
-    public static void main(String[] args) {
-        Calculadora calculator = new Calculadora();
-        String archivo = "src/main/java/uvg/edu/datos.txt";
 
-        try {
-            calculator.readFromFile(archivo);
-            System.out.println("Resultado: " + calculator.evaluateExpression());
-        } catch (IOException e) {
-            System.err.println("Error leyendo el archivo: " + e.getMessage());
-        } catch (IllegalArgumentException e) {
-            System.err.println("Error evaluando la expresión: " + e.getMessage());
+        public static void main(String[] args) {
+            Calculadora calculator = new Calculadora();
+            String archivo = "src/main/java/uvg/edu/datos.txt";
+
+            try {
+                calculator.readFromFile(archivo);
+                for (String expresion : calculator.getExpresiones()) {
+                    calculator.setExpresion(expresion);
+                    System.out.println("Expresión: " + expresion);
+                    System.out.println("Resultado: " + calculator.evaluateExpression());
+                    System.out.println();
+                }
+            } catch (IOException e) {
+                System.err.println("Error leyendo el archivo: " + e.getMessage());
+            } catch (IllegalArgumentException e) {
+                System.err.println("Error evaluando la expresión: " + e.getMessage());
+            }
         }
-    }
+
 }
