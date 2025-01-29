@@ -1,8 +1,6 @@
 package uvg.edu;
 
-public class Calculadora implements ICalculadora{
-
-  @Override
+public class Calculadora {
   public int evaluar(String expression) {
       StackVector<Integer> stack = new StackVector<>();
       String[] tokens = expression.split(" ");
